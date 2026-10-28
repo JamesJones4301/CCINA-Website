@@ -17,3 +17,16 @@ body[data-page="survey"] .hero .wrap:after{display:none}
 .survey-hero-cta h2{font-size:clamp(1.7rem,3vw,2.5rem);color:#fff;margin:0 0 20px}
 .survey-hero-cta p{color:#e4e5e2;font-size:13px;margin:12px 0 0}
 @media(max-width:540px){body[data-page="survey"] .hero{min-height:620px;padding:65px 0}.survey-hero-cta{margin-top:24px}}
+
+/* Events calendar is presented within the Events hero, with event details below. */
+body[data-page="events"] .hero{min-height:0;padding:64px 0 75px;align-items:flex-start}
+body[data-page="events"] .hero .wrap:after{display:none}
+body[data-page="events"] .hero h1{font-size:clamp(2.8rem,5vw,5.1rem);margin:14px 0 12px}
+body[data-page="events"] .hero .lead{max-width:900px}
+.events-hero-panel{margin-top:30px;padding:25px;background:rgba(255,255,255,.97);color:var(--ink);border-radius:3px;box-shadow:0 18px 50px rgba(0,0,0,.2)}
+.events-hero-panel .calendar-controls{margin:0 0 20px}
+.events-hero-panel .day,.events-hero-panel .weekday{color:var(--ink)}
+.events-hero-panel .day.other{background:#f6f4f0}
+.events-details{padding-top:65px}
+.events-details #special:empty{display:none}
+@media(max-width:540px){body[data-page="events"] .hero{padding:45px 0 55px}.events-hero-panel{padding:10px;margin-top:22px}.events-hero-panel .day{min-height:64px}}
