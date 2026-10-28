@@ -1,5 +1,5 @@
 import {SHEET_CSV_URL, FORM_EMBED_URL, CONTACT_EMAIL} from './config.js';
-import './style.css';
+
 
 const mission = 'We exist to empower local real estate investors to build lasting wealth with integrity, purpose, and a Christ-centered commitment to making a positive difference in their communities.';
 const vision = 'We aim to be a Christ-centered community for local real estate investors, providing education, support, resources, mentorship, and accountability so they grow in wealth, character, and impact, all to the glory of God.';
