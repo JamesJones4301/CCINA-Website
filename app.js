@@ -27,15 +27,16 @@ if (page === 'events') {
  main.innerHTML = hero('CCINA events calendar','Browse our education sessions, networking gatherings, and social events.')+`<section><div class="wrap"><div id="special"></div><div class="calendar-controls"><div><button id="prev" aria-label="Previous month">‹</button> <strong id="month-title"></strong> <button id="next" aria-label="Next month">›</button></div><label>Event type <select id="type-filter"><option value="All">All event types</option></select></label></div><div id="calendar" class="calendar" role="grid" aria-label="Monthly event calendar"></div><h2 style="margin-top:42px">Events this month</h2><div id="events-list" class="list"></div></div></section>`;
 }
 if (page === 'survey') {
- main.innerHTML = hero('CCINA member survey','Tell us what is working and what would help your investing journey.')+`<section class="survey-action"><div class="wrap"><h2>Share your feedback</h2><div id="survey-frame"></div></div></section>`;
- const frame = document.querySelector('#survey-frame');
- if (FORM_EMBED_URL && /^https:\/\/(forms\.gle\/|docs\.google\.com\/forms\/)/.test(FORM_EMBED_URL)) {
-  const link=document.createElement('a'); link.href=FORM_EMBED_URL; link.target='_blank'; link.rel='noopener noreferrer'; link.className='btn'; link.textContent='Open the CCINA survey';
-  const note=document.createElement('p'); note.className='muted'; note.textContent='The survey opens securely in a new tab.';
-  frame.append(link,note);
-
- } else frame.innerHTML='<div class="notice">The member survey is being connected. Please check back soon.</div>';
+ main.innerHTML = hero('CCINA member survey','Tell us what is working and what would help your investing journey.');
+ const heroWrap = main.querySelector('.hero .wrap');
+ const cta = document.createElement('div'); cta.className='survey-hero-cta';
+ const heading = document.createElement('h2'); heading.textContent='Share your feedback';
+ const link = document.createElement('a'); link.className='btn'; link.href=FORM_EMBED_URL || '#'; link.target='_blank'; link.rel='noopener noreferrer'; link.textContent='Open the CCINA survey';
+ const note = document.createElement('p'); note.textContent='The survey opens in a new tab.';
+ if(FORM_EMBED_URL && /^https:\/\/(forms\.gle\/|docs\.google\.com\/forms\/)/.test(FORM_EMBED_URL)) {cta.append(heading,link,note);} else {note.textContent='The member survey is being connected. Please check back soon.';cta.append(heading,note);}
+ heroWrap.append(cta);
 }
+
 if (page === 'contact') {
  main.innerHTML = hero('Connect with CCINA','Find events, learn together, and build relationships with other local investors.')+`<section><div class="wrap grid">${card('Meet us at an event','Visit our calendar for confirmed event details and locations.')}<article class="card"><h2>Get in touch</h2><p id="contact-detail"></p><a class="btn" href="/events">View events</a></article></div></section>`;
  const detail=document.querySelector('#contact-detail');
