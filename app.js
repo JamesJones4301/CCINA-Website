@@ -64,7 +64,7 @@ async function getEvents() {
  if(!SHEET_CSV_URL)return null;
  try {const url=new URL(SHEET_CSV_URL);if(url.protocol!=='https:')return null;const response=await fetch(url.toString(),{cache:'no-store'});if(!response.ok)return null;return parseCSV(await response.text());} catch {return null;}
 }
-const staticEvents = [{date:'2026-11-02',title:'CCINA Investor Social',type:'Social',time:'7:00 PM – 8:00 PM',location:'Besos Cocina and Cantina, Round Rock, Texas',description:'Connect with fellow CCINA real estate investors.'},{date:'2026-11-20',title:'CCINA Meetup in Dallas with CCC Members',type:'Meetup',time:'All day',location:'Dallas, Texas — venue to be confirmed',description:'CCINA meetup with CCC members in Dallas.'},{date:'2026-12-07',title:'CCINA Social and Ornament Gifting',type:'Social',time:'Time to be confirmed',location:'Location to be confirmed',description:'A CCINA community gathering. Details will be shared when confirmed.'}];
+const staticEvents = [{date:'2026-11-02',title:'CCINA Investor Social',type:'Social',time:'7:00 PM – 8:00 PM',location:'Besos Cocina and Cantina, Round Rock, Texas',description:'Connect with fellow CCINA real estate investors.'},{date:'2026-11-20',title:'CCINA Meetup in Dallas with CCC Members',type:'Meetup',time:'All day',location:'Dallas, Texas — venue to be confirmed',description:'CCINA meetup with CCC members in Dallas.'},{date:'2026-12-07',title:'CCINA Social and Ornament Gifting',type:'Social',time:'7:00 PM – 9:00 PM',location:'Location to be confirmed',description:'A CCINA community gathering. Details will be shared when confirmed.'}];
 const events = (await getEvents()) ?? staticEvents;
 if (page === 'home') {
  const upcoming=document.querySelector('#upcoming');
