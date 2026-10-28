@@ -9,3 +9,11 @@ section{padding:90px 0}h2{font:500 clamp(2.2rem,4vw,3.6rem)/1.17 'Playfair Displ
 
 /* Official uploaded CCINA logo: preserve full artwork and aspect ratio. */
 .brand-logo{display:block;width:auto;max-width:210px;height:76px;object-fit:contain;flex-shrink:0}.brand-name{font-size:12px;line-height:1.5}.brand-name small{font-size:10px}@media(max-width:540px){.brand-logo{max-width:170px;height:62px}.brand-name{font-size:10px}}
+
+/* Survey call to action belongs directly beneath the survey introduction. */
+body[data-page="survey"] .hero{min-height:650px;padding:80px 0 90px;align-items:center}
+body[data-page="survey"] .hero .wrap:after{display:none}
+.survey-hero-cta{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28);max-width:650px}
+.survey-hero-cta h2{font-size:clamp(1.7rem,3vw,2.5rem);color:#fff;margin:0 0 20px}
+.survey-hero-cta p{color:#e4e5e2;font-size:13px;margin:12px 0 0}
+@media(max-width:540px){body[data-page="survey"] .hero{min-height:620px;padding:65px 0}.survey-hero-cta{margin-top:24px}}
