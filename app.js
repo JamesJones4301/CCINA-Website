@@ -74,7 +74,7 @@ if (page === 'events') {
  const cal=document.querySelector('#calendar'),list=document.querySelector('#events-list'),filter=document.querySelector('#type-filter');
  const types=[...new Set((events||[]).map(e=>e.type).filter(Boolean))].sort();
  for(const type of types){const option=document.createElement('option');option.value=type;option.textContent=type;filter.append(option);}
- const view=new Date();view.setDate(1);
+ const view=new Date(2026,10,1); const earliestMonth=new Date(2026,10,1);
  const special=(events||[]).find(isHoliday);
 
 
@@ -82,6 +82,7 @@ if (page === 'events') {
   const year=view.getFullYear(),month=view.getMonth(),first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate();
   const selected=(events||[]).filter(e=>filter.value==='All'||e.type===filter.value);
   document.querySelector('#month-title').textContent=view.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const atStart=view.getFullYear()===earliestMonth.getFullYear() && view.getMonth()===earliestMonth.getMonth();document.querySelector('#prev').disabled=atStart;
   cal.innerHTML=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="weekday" role="columnheader">${d}</div>`).join('');
   for(let i=0;i<Math.ceil((first+days)/7)*7;i++){
    const day=i-first+1,valid=day>0&&day<=days;
@@ -94,7 +95,7 @@ if (page === 'events') {
   const prefix=year+'-'+String(month+1).padStart(2,'0');
   list.innerHTML=selected.filter(e=>e.date.startsWith(prefix)).map(eventCard).join('')||'<p class="muted">No events listed for this month.</p>';
  }
- document.querySelector('#prev').addEventListener('click',()=>{view.setMonth(view.getMonth()-1);renderCalendar();});
+ document.querySelector('#prev').addEventListener('click',()=>{if(view.getFullYear()===earliestMonth.getFullYear() && view.getMonth()===earliestMonth.getMonth())return;view.setMonth(view.getMonth()-1);renderCalendar();});
  document.querySelector('#next').addEventListener('click',()=>{view.setMonth(view.getMonth()+1);renderCalendar();});
  filter.addEventListener('change',renderCalendar);renderCalendar();
 }
