@@ -31,9 +31,9 @@ if (page === 'survey') {
  const frame = document.querySelector('#survey-frame');
  if (FORM_EMBED_URL && /^https:\/\/(forms\.gle\/|docs\.google\.com\/forms\/)/.test(FORM_EMBED_URL)) {
   const link=document.createElement('a'); link.href=FORM_EMBED_URL; link.target='_blank'; link.rel='noopener noreferrer'; link.className='btn'; link.textContent='Open the CCINA survey';
-  const note=document.createElement('p'); note.className='muted'; note.textContent='You can open the survey in a separate tab if the embedded version does not load.';
+  const note=document.createElement('p'); note.className='muted'; note.textContent='The survey opens securely in a new tab.';
   frame.append(link,note);
-  const iframe=document.createElement('iframe'); iframe.src=FORM_EMBED_URL; iframe.title='CCINA member survey'; iframe.className='form-embed'; iframe.loading='lazy'; frame.append(iframe);
+
  } else frame.innerHTML='<div class="notice">The member survey is being connected. Please check back soon.</div>';
 }
 if (page === 'contact') {
