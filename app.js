@@ -29,7 +29,10 @@ if (page === 'events') {
 if (page === 'survey') {
  main.innerHTML = hero('CCINA member survey','Tell us what is working and what would help your investing journey.')+`<section><div class="wrap"><h2>Share your feedback</h2><div id="survey-frame"></div></div></section>`;
  const frame = document.querySelector('#survey-frame');
- if (FORM_EMBED_URL && /^https:\/\/docs\.google\.com\/forms\//.test(FORM_EMBED_URL)) {
+ if (FORM_EMBED_URL && /^https:\/\/(forms\.gle\/|docs\.google\.com\/forms\/)/.test(FORM_EMBED_URL)) {
+  const link=document.createElement('a'); link.href=FORM_EMBED_URL; link.target='_blank'; link.rel='noopener noreferrer'; link.className='btn'; link.textContent='Open the CCINA survey';
+  const note=document.createElement('p'); note.className='muted'; note.textContent='You can open the survey in a separate tab if the embedded version does not load.';
+  frame.append(link,note);
   const iframe=document.createElement('iframe'); iframe.src=FORM_EMBED_URL; iframe.title='CCINA member survey'; iframe.className='form-embed'; iframe.loading='lazy'; frame.append(iframe);
  } else frame.innerHTML='<div class="notice">The member survey is being connected. Please check back soon.</div>';
 }
@@ -55,11 +58,11 @@ async function getEvents() {
  if(!SHEET_CSV_URL)return null;
  try {const url=new URL(SHEET_CSV_URL);if(url.protocol!=='https:')return null;const response=await fetch(url.toString(),{cache:'no-store'});if(!response.ok)return null;return parseCSV(await response.text());} catch {return null;}
 }
-const events = await getEvents();
+const staticEvents = [{date:'2026-12-07',title:'CCINA Social and Ornament Gifting',type:'Social',time:'Time to be confirmed',location:'Location to be confirmed',description:'A CCINA community gathering. Details will be shared when confirmed.'}];
+const events = (await getEvents()) ?? staticEvents;
 if (page === 'home') {
  const upcoming=document.querySelector('#upcoming');
- if(events===null) upcoming.innerHTML='<p class="notice">The live calendar is being connected. Visit the Events page for updates.</p>';
- else {const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/Chicago'});upcoming.innerHTML=events.filter(e=>e.date>=today).slice(0,3).map(eventCard).join('')||'<p>No upcoming events are currently listed.</p>';}
+ {const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/Chicago'});upcoming.innerHTML=events.filter(e=>e.date>=today).slice(0,3).map(eventCard).join('')||'<p>No upcoming events are currently listed.</p>';}
 }
 if (page === 'events') {
  const cal=document.querySelector('#calendar'),list=document.querySelector('#events-list'),filter=document.querySelector('#type-filter');
@@ -68,7 +71,7 @@ if (page === 'events') {
  const view=new Date();view.setDate(1);
  const special=(events||[]).find(isHoliday);
  if(special)document.querySelector('#special').innerHTML='<h2>Featured gathering</h2>'+eventCard(special);
- if(events===null)document.querySelector('#special').innerHTML='<div class="notice">The live Google Sheets calendar is being connected. Event dates will appear here when published.</div>';
+
  function renderCalendar(){
   const year=view.getFullYear(),month=view.getMonth(),first=new Date(year,month,1).getDay(),days=new Date(year,month+1,0).getDate();
   const selected=(events||[]).filter(e=>filter.value==='All'||e.type===filter.value);
