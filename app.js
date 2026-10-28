@@ -24,7 +24,12 @@ if (page === 'about') {
  main.innerHTML = hero('About CCINA','Investing with integrity, learning together, and making a positive difference.')+`<section><div class="wrap grid">${card('Our mission',mission)}${card('Our vision',vision)}</div></section><section class="soft"><div class="wrap grid three">${card('Education','Practical real estate learning for every stage of the journey.')}${card('Mentorship','Accountability, shared resources, and encouragement.')}${card('Community','Relationships centered on service, faith, and integrity.')}</div></section>`;
 }
 if (page === 'events') {
- main.innerHTML = hero('CCINA events calendar','Browse our education sessions, networking gatherings, and social events.')+`<section><div class="wrap"><div id="special"></div><div class="calendar-controls"><div><button id="prev" aria-label="Previous month">‹</button> <strong id="month-title"></strong> <button id="next" aria-label="Next month">›</button></div><label>Event type <select id="type-filter"><option value="All">All event types</option></select></label></div><div id="calendar" class="calendar" role="grid" aria-label="Monthly event calendar"></div><h2 style="margin-top:42px">Events this month</h2><div id="events-list" class="list"></div></div></section>`;
+ main.innerHTML = hero('CCINA events calendar','Browse our education sessions, networking gatherings, and social events.');
+ const heroWrap=main.querySelector('.hero .wrap');
+ const calendarPanel=document.createElement('div');calendarPanel.className='events-hero-panel';
+ calendarPanel.innerHTML=`<div class="calendar-controls"><div><button id="prev" aria-label="Previous month">‹</button> <strong id="month-title"></strong> <button id="next" aria-label="Next month">›</button></div><label>Event type <select id="type-filter"><option value="All">All event types</option></select></label></div><div id="calendar" class="calendar" role="grid" aria-label="Monthly event calendar"></div>`;
+ heroWrap.append(calendarPanel);
+ main.insertAdjacentHTML('beforeend',`<section class="events-details"><div class="wrap"><div id="special"></div><h2>Events this month</h2><div id="events-list" class="list"></div></div></section>`);
 }
 if (page === 'survey') {
  main.innerHTML = hero('CCINA member survey','Tell us what is working and what would help your investing journey.');
